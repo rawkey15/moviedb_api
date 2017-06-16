@@ -1,0 +1,31 @@
+{
+  "name": "moviedb-demo",
+  "version": "1.0.0",
+  "description": "A sample Node.js app using MoviedbApi",
+  "engines": {
+    "node": "6.10.2"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "2.5.6",
+    "express": "4.15.2",	
+    "request": "^2.81.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rawkey15/moviedb_api.git"
+  },
+   "bugs": {
+        "url": "https://github.com/rawkey15/moviedb_api/issues"
+    },
+  "homepage": "https://github.com/rawkey15/moviedb_api#readme",
+  "keywords": [
+    "node",
+    "moviedb",
+    "express"
+  ],
+  "license": "MIT"
+}

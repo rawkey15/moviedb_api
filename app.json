@@ -1,0 +1,8 @@
+{
+  "name": "Demo of MovieDB api usage",
+  "description": "A Node.js app using Express 4 and MovieDB api",
+  "repository": "https://github.com/rawkey15/moviedb_api.git",
+  "logo": "",
+  "keywords": ["node", "express", "moviedb"],
+  "image": ""
+}
