@@ -98,10 +98,11 @@ request(options).pipe(res);
             json: true
         }, function(error,response, body) {
             const obj = body;
-             res.send({data: body});
-           // const plaintext = JSON.stringify(obj);
-            //const buffer = Buffer.from(plaintext);
-           // const encryptedPlainText = AES.encrypt(key, plaintext);
+             
+             const plaintext = JSON.stringify(obj);
+             const buffer = Buffer.from(plaintext);
+            const encryptedPlainText = AES.encrypt(key, plaintext);
+            res.send({data: encryptedPlainText});
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
                     console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
