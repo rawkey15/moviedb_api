@@ -101,8 +101,8 @@ request(options).pipe(res);
              
              const plaintext = JSON.stringify(obj);
              const buffer = Buffer.from(plaintext);
-            const encryptedPlainText = AES.encrypt(key, plaintext);
-            res.send({data: encryptedPlainText});
+            //const encryptedPlainText = AES.encrypt(key, plaintext);
+            res.send({data: buffer});
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
                     console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
