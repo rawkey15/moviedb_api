@@ -102,7 +102,7 @@ request(options).pipe(res);
              
              const plaintext = JSON.stringify(obj);
             //const buffer = Buffer.from(plaintext);
-            //const encryptedPlainText = AES.encrypt(key, plaintext);
+            const encryptedPlainText = AES.encrypt(key, plaintext);
             res.send({data: plaintext});
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
