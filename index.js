@@ -80,10 +80,10 @@ request(options).pipe(res);
 });
 
  app.post('/rss/newList', function (req, res) {
-        const postData = req.body;
+        //const postData = req.body;
         request({
             method: 'POST',
-            uri: postData.source,
+            uri: 'https://data.mongodb-api.com/app/data-mvwym/endpoint/data/v1/action/findOne',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Request-Headers': '*',
