@@ -1,10 +1,10 @@
 var express = require('express');
 var app = express();
 var request = require('request');
-const AES = require('aes256');
+const aes256 = require('aes256');
 //const Buffer = require('buffer/').Buffer;
 
-const key = 'H$ek@r~15081984~';
+
 const imageToBase64 = require('image-to-base64');
 
 app.set('port', (process.env.PORT || 5000));
@@ -102,7 +102,8 @@ request(options).pipe(res);
              
              const plaintext = JSON.stringify(obj);
             //const buffer = Buffer.from(plaintext);
-           // const encryptedPlainText = AES.encrypt(key, plaintext);
+             const key = 'H$ek@r~15081984~';
+             const encryptedPlainText = aes256.encrypt(key, plaintext);
             res.send({data: plaintext });
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
