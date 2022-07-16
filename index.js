@@ -79,7 +79,7 @@ var options = { method: 'GET',
 request(options).pipe(res);
 });
 
- app.post('/rss/newList', function (req, res) {
+ app.get('/rss/newList', function (req, res) {
         //const postData = req.body;
         request({
             method: 'POST',
