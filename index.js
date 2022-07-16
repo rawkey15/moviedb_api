@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var request = require('request');
 const AES = require('aes256');
+import { Buffer } from 'buffer';
 
 const key = 'H$ek@r~15081984~';
 const imageToBase64 = require('image-to-base64');
