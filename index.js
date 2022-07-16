@@ -81,8 +81,8 @@ request(options).pipe(res);
 
  app.get('/rss/newList', function (req, res) {
         //const postData = req.body;
-     res.send({data: 'hi', pic: 'test'});
-       /* request({
+     
+       request({
             method: 'POST',
             uri: 'https://data.mongodb-api.com/app/data-mvwym/endpoint/data/v1/action/findOne',
             headers: {
@@ -97,14 +97,12 @@ request(options).pipe(res);
             },
             json: true
         }, function(error,response, body) {
-            console.log(response.statusCode) // 200
-            console.log(response.headers['content-type']) // 'image/png'
             const obj = body;
-            console.log(obj);
-            const plaintext = JSON.stringify(obj);
-            const buffer = Buffer.from(plaintext);
-            const encryptedPlainText = AES.encrypt(key, plaintext);
-            imageToBase64(obj.document.personalDetails.picture).then(
+             res.send({data: body});
+           // const plaintext = JSON.stringify(obj);
+            //const buffer = Buffer.from(plaintext);
+           // const encryptedPlainText = AES.encrypt(key, plaintext);
+            /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
                     console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
                     res.send({data: encryptedPlainText, pic: response});
@@ -113,9 +111,9 @@ request(options).pipe(res);
                 (error) => {
                     console.log(error); // Logs an error if there was one
                 }
-            )
+            )*/
             
-          });*/
+          });
     });
 
 
