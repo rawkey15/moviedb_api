@@ -81,7 +81,8 @@ request(options).pipe(res);
 
  app.get('/rss/newList', function (req, res) {
         //const postData = req.body;
-        request({
+     res.send({data: 'hi', pic: 'test'});
+       /* request({
             method: 'POST',
             uri: 'https://data.mongodb-api.com/app/data-mvwym/endpoint/data/v1/action/findOne',
             headers: {
@@ -114,7 +115,7 @@ request(options).pipe(res);
                 }
             )
             
-          });
+          });*/
     });
 
 
