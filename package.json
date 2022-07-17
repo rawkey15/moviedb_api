@@ -16,8 +16,7 @@
   },
   "devDependencies": {
     "aes256": "^1.1.0",
-    "image-to-base64": "^2.2.0",
-    "buffer": "^6.0.3"
+    "image-to-base64": "^2.2.0"
   },
   "repository": {
     "type": "git",
