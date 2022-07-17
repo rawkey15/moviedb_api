@@ -80,12 +80,12 @@ var options = { method: 'GET',
 request(options).pipe(res);
 });
 
- app.get('/rss/newList', function (req, res) {
-        //const postData = req.body;
+ app.post('/rss/newList', function (req, res) {
+       const postData = req.body;
      
        request({
             method: 'POST',
-            uri: 'https://data.mongodb-api.com/app/data-mvwym/endpoint/data/v1/action/findOne',
+            uri: postData.source,
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Request-Headers': '*',
@@ -104,7 +104,7 @@ request(options).pipe(res);
             //const buffer = Buffer.from(plaintext);
              const key = 'H$ek@r~15081984~';
              const encryptedPlainText = aes256.encrypt(key, plaintext);
-            res.send({data: encryptedPlainText});
+            res.send({data: encryptedPlainText, source: postData.source});
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
                     console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
