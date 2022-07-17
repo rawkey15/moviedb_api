@@ -4,7 +4,7 @@ var request = require('request');
 const aes256 = require('aes256');
 //const Buffer = require('buffer/').Buffer;
 
-
+const key = 'H$ek@r~15081984~';
 const imageToBase64 = require('image-to-base64');
 
 app.set('port', (process.env.PORT || 5000));
@@ -85,7 +85,7 @@ request(options).pipe(res);
      
        request({
             method: 'POST',
-            uri: postData.source,
+            uri: aes256.decrypt(key, postData.source),
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Request-Headers': '*',
@@ -102,9 +102,9 @@ request(options).pipe(res);
              
              const plaintext = JSON.stringify(obj);
             //const buffer = Buffer.from(plaintext);
-             const key = 'H$ek@r~15081984~';
+             
              const encryptedPlainText = aes256.encrypt(key, plaintext);
-            res.send({data: encryptedPlainText, source: postData.source});
+            res.send({data: encryptedPlainText, source: postData.source, decr:aes256.decrypt(key, postData.source)});
             /*imageToBase64(obj.document.personalDetails.picture).then(
                 (response) => {
                     console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
