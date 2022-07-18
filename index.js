@@ -87,16 +87,16 @@ request(options).pipe(res);
    const postData = req.body;
     // Decrypt
    try{
-    var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
+    /*var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
      var config = {
         headers: { 'Content-Type': 'text/xml' }
-    };
+    };*/
 
     /*axios.get(originalText, config).then(({ data }) => {
         const plaintext = data.toString();
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
-        res.send(ciphertext);
+        res.send(postData);
     });*/
       res.send(hi);
    } catch (ex) {
