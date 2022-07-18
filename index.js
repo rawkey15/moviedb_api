@@ -86,10 +86,10 @@ request(options).pipe(res);
  app.post('/rss/newList', function (req, res) {
    const postData = req.body;
     // Decrypt
+   try{
     var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-    var config = {
+     var config = {
         headers: { 'Content-Type': 'text/xml' }
     };
 
@@ -98,6 +98,11 @@ request(options).pipe(res);
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
         res.send(ciphertext);
     });
+   } catch (ex) {
+       res.send({err: ex});
+   } 
+
+    
 });
 app.post('/rss/data', function (req, res) {
     const postData = req.body;
