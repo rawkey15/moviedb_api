@@ -93,11 +93,12 @@ request(options).pipe(res);
         headers: { 'Content-Type': 'text/xml' }
     };
 
-    axios.get(originalText, config).then(({ data }) => {
+    /*axios.get(originalText, config).then(({ data }) => {
         const plaintext = data.toString();
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
         res.send(ciphertext);
-    });
+    });*/
+      res.send(hi);
    } catch (ex) {
        res.send({err: ex});
    } 
