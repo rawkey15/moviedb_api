@@ -94,33 +94,20 @@ request(options).pipe(res);
     };
 
     axios.get(originalText, config).then(({ data }) => {
-        console.log(data);
         const plaintext = data.toString();
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
-
-        // Decrypt
-        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
-        var originalText = bytes.toString(CryptoJS.enc.Utf8);
         res.send(ciphertext);
-
-
     });
 });
 app.post('/rss/data', function (req, res) {
     const postData = req.body;
-
     // Decrypt
     var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
 
     axios.get(originalText).then(({ data }) => {
-        console.log(data);
         const plaintext = JSON.stringify(data);
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
-
-        // Decrypt
-        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
-        var originalText = bytes.toString(CryptoJS.enc.Utf8);
         res.send(ciphertext);
     });
 
@@ -128,8 +115,6 @@ app.post('/rss/data', function (req, res) {
 
 app.post('/rss/history', function (req, res) {
     const postData = req.body;
-
-
     // Decrypt
     var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
     var originalText = bytes.toString(CryptoJS.enc.Utf8);
@@ -142,15 +127,9 @@ app.post('/rss/history', function (req, res) {
             'Access-Control-Request-Headers': '*',
         },
     }, function (error, response, body) { 
-        console.log(body);
         const plaintext = body.toString();
         var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
-
-        // Decrypt
-        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
-        var originalText = bytes.toString(CryptoJS.enc.Utf8);
         res.send(ciphertext);
-
     })
 
 
