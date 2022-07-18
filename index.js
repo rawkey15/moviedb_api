@@ -92,7 +92,7 @@ request(options).pipe(res);
 
  app.post('/rss/newList', function (req, res) {
    const postData = req.body;
-   res.send(postData);
+   res.send(req.body);
     // Decrypt
    //try{
     /*var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
