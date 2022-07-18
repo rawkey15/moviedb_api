@@ -8,8 +8,6 @@ const CryptoJS = require('crypto-js');
 
 const ENC_KEY = 'a8418fcd735a3551d9e29e465e1c01a1'; // set random encryption key length 32 
 const imageToBase64 = require('image-to-base64');
-
-const parser = require('xml-to-json-promise');
 const axios = require('axios').default;
 
 app.set('port', (process.env.PORT || 5000));
