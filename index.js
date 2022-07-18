@@ -3,6 +3,7 @@ var app = express();
 var request = require('request');
 const aes256 = require('aes256');
 //const Buffer = require('buffer/').Buffer;
+const bodyParser = require('body-parser');
 
 const CryptoJS = require('crypto-js');
 
@@ -11,6 +12,9 @@ const imageToBase64 = require('image-to-base64');
 const axios = require('axios').default;
 
 app.set('port', (process.env.PORT || 5000));
+
+// parse application/json
+app.use(bodyParser.json())
 
 //setup cross-origin
 var cors =  {
