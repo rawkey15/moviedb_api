@@ -4,8 +4,13 @@ var request = require('request');
 const aes256 = require('aes256');
 //const Buffer = require('buffer/').Buffer;
 
-const key = 'H$ek@r~15081984~';
+const CryptoJS = require('crypto-js');
+
+const ENC_KEY = 'a8418fcd735a3551d9e29e465e1c01a1'; // set random encryption key length 32 
 const imageToBase64 = require('image-to-base64');
+
+const parser = require('xml-to-json-promise');
+const axios = require('axios').default;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -81,44 +86,77 @@ request(options).pipe(res);
 });
 
  app.post('/rss/newList', function (req, res) {
-       const postData = req.body;
-     
-       request({
-            method: 'POST',
-            uri: aes256.decrypt(key, postData.source),
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Request-Headers': '*',
-                'api-key': '7uSeUtvlvwC1FWEC2QGdtQGs5fS6BcK4QjJJlycpcxtVy4G6gRdr3Q3vyWxB1QDv'
-            },
-            body: {
-                "collection": "user",
-                "database": "users",
-                "dataSource": "Cluster0"
-            },
-            json: true
-        }, function(error,response, body) {
-            const obj = body;
-             
-             const plaintext = JSON.stringify(obj);
-            //const buffer = Buffer.from(plaintext);
-             
-             const encryptedPlainText = aes256.encrypt(key, plaintext);
-            res.send({data: encryptedPlainText, source: postData.source, decr:aes256.decrypt(key, postData.source)});
-            /*imageToBase64(obj.document.personalDetails.picture).then(
-                (response) => {
-                    console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
-                    res.send({data: encryptedPlainText, pic: response});
-                }
-            ).catch(
-                (error) => {
-                    console.log(error); // Logs an error if there was one
-                }
-            )*/
-            
-          });
+   const postData = req.body;
+    // Decrypt
+    var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    var config = {
+        headers: { 'Content-Type': 'text/xml' }
+    };
+
+    axios.get(originalText, config).then(({ data }) => {
+        console.log(data);
+        const plaintext = data.toString();
+        var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
+
+        // Decrypt
+        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
+        var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        res.send(ciphertext);
+
+
+    });
+});
+app.post('/rss/data', function (req, res) {
+    const postData = req.body;
+
+    // Decrypt
+    var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    axios.get(originalText).then(({ data }) => {
+        console.log(data);
+        const plaintext = JSON.stringify(data);
+        var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
+
+        // Decrypt
+        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
+        var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        res.send(ciphertext);
     });
 
+});
+
+app.post('/rss/history', function (req, res) {
+    const postData = req.body;
+
+
+    // Decrypt
+    var bytes = CryptoJS.AES.decrypt(postData.source, ENC_KEY);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    request({
+        method: 'GET',
+        uri: originalText,
+        headers: {
+            'Content-Type': 'application/xml',
+            'Access-Control-Request-Headers': '*',
+        },
+    }, function (error, response, body) { 
+        console.log(body);
+        const plaintext = body.toString();
+        var ciphertext = CryptoJS.AES.encrypt(plaintext, ENC_KEY).toString();
+
+        // Decrypt
+        var bytes = CryptoJS.AES.decrypt(ciphertext, ENC_KEY);
+        var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        res.send(ciphertext);
+
+    })
+
+
+});
 
 
 
