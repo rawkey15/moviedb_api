@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const CryptoJS = require('crypto-js');
 
-const ENC_KEY = 'a8418fcd735a3551d9e29e465e1c01a1'; // set random encryption key length 32 
+const ENC_KEY = '<<your key>>'; // set random encryption key length 32 
 const imageToBase64 = require('image-to-base64');
 const axios = require('axios').default;
 
