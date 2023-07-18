@@ -6,8 +6,8 @@ app.set('port', (process.env.PORT || 5000));
 
 //setup cross-origin
 var cors =  {
-    origin: ["<<your allowed domains>>"],
-    default: "<<your default allowed domain>>" 
+    origin: [process.env.allowed_site],
+    default: process.env.allowed_site
 };
 
 app.use(function(req, res, next) {
@@ -41,8 +41,8 @@ app.listen(app.get('port'), function() {
 
 //Router for rest api
 
-var v3_apikey = '<<your api key obtained from themoviedb.org>>';
-var v4_authToken = 'Bearer<<your authToken obtained from themoviedb.org>>';
+var v3_apikey = process.env.v3_apikey;
+var v4_authToken = process.env.v4_authToken;
 
 app.get('/search/:movie', function(req, res, next) {
 var moviename = req.params.movie;
