@@ -24,7 +24,6 @@ app.use(function(req, res, next) {
 
 });
 
-
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
